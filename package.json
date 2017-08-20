@@ -4,8 +4,8 @@
   "description": "a simple reactjs boilerplate",
   "main": "index.jsx",
   "scripts": {
-    "dev": "webpack-dev-server --open --devtool eval --progress --colors",
-    "make": "webpack",
+    "start": "webpack-dev-server --open --devtool eval --progress --colors --hot",
+    "make": "webpack -p",
     "clean": "rm -rf ./dist/"
   },
   "author": "martysun",
@@ -23,7 +23,10 @@
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.2",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "file-loader": "^0.11.2",
+    "less-loader": "^4.0.5",
+    "url-loader": "^0.5.9"
   },
   "dependencies": {
     "react": "^15.5.4",

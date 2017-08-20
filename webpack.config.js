@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: `${__dirname}/src/index.html`,
@@ -8,11 +9,11 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    './src/index.jsx',
+    './src/index.js',
   ],
 
   output: {
-    path: `${__dirname}/dist`,
+    path: path.resolve('dist'),
     filename: 'bundle.js',
   },
 
@@ -25,19 +26,40 @@ module.exports = {
       },
       {
         test:/\.css$/,
-        exclude: /node_modules/,
         loader: [
           'style-loader',
           'css-loader',
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(sass|scss)$/,
         loader: [
           'style-loader',
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.less$/,
+        loader: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
+      },
+      {
+        test: /\.(png|gif|jpe?g|svg)(\?.*)?$/,
+        loader: [
+          'url-loader?limit=10000' /* converts images that less than 10kb into base64 */
+        ]
+      },
+      {
+        test: /\.jpg$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(ttf|eot|svg|woff2?)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader'
       }
     ],
   },
@@ -47,5 +69,7 @@ module.exports = {
     port: 8000,
   },
 
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+  ],
 }
